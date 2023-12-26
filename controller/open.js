@@ -85,6 +85,7 @@ const login = async (req, res) => {
     console.log(access_token);
     console.log(refresh_token);
     console.log(cookie_option);
+    console.log("Request Origin:", req.headers.origin);
 
     res.cookie("access_token", access_token, cookie_option);
     res.cookie("refresh_token", refresh_token, cookie_option);
