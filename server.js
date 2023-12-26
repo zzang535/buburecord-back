@@ -21,7 +21,8 @@ sequelize
 // CORS 설정
 app.use(
   cors({
-    origin: process.env.FRONT_APP_URL, // 프론트엔드 서버 주소
+    // origin: process.env.FRONT_APP_URL, // 프론트엔드 서버 주소
+    origin: true,
     credentials: true, // 쿠키를 포함한 요청 허용
   })
 );
