@@ -26,16 +26,19 @@ const create_refresh = (payload) => {
 };
 
 let cookie_option;
-if (process.env.APP_ENVIRONMENT == "production") {
+if (process.env.APP_ENVIRONMENT == "development") {
+  cookie_option = {
+    path: "/",
+    httpOnly: true, // 클라이언트 측 js 에서 쿠키 접근 불가
+    sameSite: "lax", // 다른 출처의 요청 중 get 요청에서만 쿠키 전송 가능
+    secure: false, // https 가 아닌 경우도 쿠키 전송 가능
+  };
+} else if (process.env.APP_ENVIRONMENT == "production") {
   cookie_option = {
     path: "/",
     httpOnly: true, // 클라이언트 측 js 에서 쿠키 접근 불가
     sameSite: "none", // 다른 출처의 요청에서도 쿠키 전송 가능
-    secure: true, // HTTPS를 통해서만 쿠키를 전송
-  };
-} else {
-  cookie_option = {
-    path: "/",
+    secure: true, // HTTPS를 통해서만 쿠키를 전송 (sameSite: none 일 때만 필요)
   };
 }
 
