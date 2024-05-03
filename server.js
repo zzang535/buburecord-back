@@ -39,6 +39,13 @@ app.use(express.json({ limit: "300mb" }));
 //   next();
 // });
 
+app.use((req, res, next) => {
+  console.log(
+    `${new Date().toISOString()} - ${req.method} request to ${req.originalUrl}`
+  );
+  next();
+});
+
 app.use("/tuning", require("./router/tuning.js"));
 app.use("/open", require("./router/open.js"));
 app.use(require("./middleware/token.js").token);
