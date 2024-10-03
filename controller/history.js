@@ -19,4 +19,27 @@ async function list(req, res) {
   }
 }
 
-module.exports = { list };
+async function create(req, res) {
+  const { id } = req.token;
+  const { date, contentKR, contentJP } = req.body;
+  console.log(req.body);
+  console.log(id);
+  try {
+    const createData = {
+      date: date,
+      content_korean: contentKR,
+      content_japanese: contentJP,
+      user_id: id,
+    };
+
+    console.log('createData', createData);
+
+    await History.create(createData);
+    return res.status(200).send({ message: "create history success" });
+  } catch (err) {
+    console.log(err);
+    return res.status(500).send({ message: "create history fail" });
+  }
+}
+
+module.exports = { list, create };
