@@ -6,8 +6,8 @@ const secret = process.env.TOKEN_SECRET_KEY;
 const create_access = (payload) => {
   return jwt.sign(payload, secret, {
     algorithm: "HS256",
-    // expiresIn: 10 // 10s test
-    expiresIn: 30 * 24 * 60 * 60, // 30 days
+    expiresIn: 10 // 10s test
+    // expiresIn: 30 * 24 * 60 * 60, // 30 days
   });
 };
 
@@ -20,10 +20,11 @@ const verify = (token) => {
 const create_refresh = (payload) => {
   return jwt.sign(payload, secret, {
     algorithm: "HS256",
-    // expiresIn: 30 // 30s test
-    expiresIn: 30 * 24 * 60 * 60, // 30 days
+    expiresIn: 30 // 30s test
+    // expiresIn: 30 * 24 * 60 * 60, // 30 days
   });
 };
+
 
 let cookie_option;
 if (process.env.APP_ENVIRONMENT == "development") {
